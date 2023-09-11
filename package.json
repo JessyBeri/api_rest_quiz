@@ -1,0 +1,20 @@
+{
+  "name": "api_quiz_snyderverse",
+  "version": "1.0.0",
+  "description": "réalisation d'un quiz API rest avec node.js ",
+  "type":"module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Jessica",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
