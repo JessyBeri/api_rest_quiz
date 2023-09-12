@@ -1,11 +1,19 @@
 import express from 'express';
 import router from "./routes/questionRoutes.js";
+import dotenv from "dotenv";
+import database from "./config/database.js";
+
+// configuration dotenv
+dotenv.config();
+
+// Connexion à MongoDB
+database();
 
 // Création d'un serveur express
 const app = express();
 
 // Définition du port 3000
-const port = 3000;
+const port = process.env.PORT;
 
 // MIDDLEWARE
 // app.use() --> use() est utilisé dans la gestion des fonctions du middleware
