@@ -27,14 +27,14 @@ app.get("/", (req, res) => {
     res.send({ test: "test" });
 });
 
-app.get("/questions/", (req, res) => {
-    res.send("envoi post question");
-});
+// app.get("/questions/", (req, res) => {
+//     res.send("envoi post question");
+// });
 
-app.get("/questions/:id", (req, res) => {
-    let id = req.params.id;
-    res.send("question de l'id " + id);
-});
+// app.get("/questions/:id", (req, res) => {
+//     let id = req.params.id;
+//     res.send("question de l'id " + id);
+// });
 
 
 
