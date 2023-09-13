@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
 // poster une question
 router.post("/", (req, res) => {
     try {
-        res.status(200).send({ message: "la question avec id " + req.params.id + " est récupérée" });
+        res.status(200).send({ message: "la question est créée" });
     } catch (err) {
         res.status(400);
     }
