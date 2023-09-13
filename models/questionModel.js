@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const QuestionSchema = new mongoose.Schema({
+const questionSchema = new mongoose.Schema({
     question: {
         type: String,
         required: true,
@@ -18,11 +18,13 @@ export const QuestionSchema = new mongoose.Schema({
             },
         },
     ],
-    category: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Category",
-            required: false,
-        },
-    ],
+    // category: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "Category",
+    //         required: false,
+    //     },
+    // ],
 });
+
+export default mongoose.model("Questions", questionSchema);

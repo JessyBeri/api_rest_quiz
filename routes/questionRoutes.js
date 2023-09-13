@@ -1,4 +1,6 @@
 import express from "express";
+import Questions from "../models/questionModel.js";
+
 const router = express.Router(); // initialisation du router
 
 // router.use() --> middleware utilisé pour tous les types de requête http
@@ -8,7 +10,6 @@ const router = express.Router(); // initialisation du router
 router.get("/", (req, res) => {
     try {
         console.log(req.body);
-
         res.status(200).send(req.body);
     } catch (err) {
         res.status(400);
@@ -25,11 +26,17 @@ router.get("/:id", (req, res) => {
 });
 
 // poster une question
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        res.status(200).send({ message: "la question est créée" });
+        const { question, multiple_choice } = req_body;
+        console.log(req.body);
+        const questionAsk = await Questions.save({
+            question,
+            multiple_choice,
+        });
+        res.status(201).json({ questionAsk });
     } catch (err) {
-        res.status(400);
+        return res.status(500).json({ error: error });
     }
 });
 
