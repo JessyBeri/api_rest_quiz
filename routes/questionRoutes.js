@@ -7,7 +7,9 @@ const router = express.Router(); // initialisation du router
 // récupérer toutes les questions
 router.get("/", (req, res) => {
     try {
-        res.status(200).send({ message: "les questions sont récupérées" });
+        console.log(req.body);
+
+        res.status(200).send(req.body);
     } catch (err) {
         res.status(400);
     }
