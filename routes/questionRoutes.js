@@ -62,10 +62,21 @@ router.post("/", async (req, res) => {
 // mettre à jour une question, http://localhost:3000/questions/:id
 router.put("/:id", async (req, res) => {
     try {
-        const updateQuestion = await Question.findByIdAndUpdate(req.params.id);
-        res.status(200).send(updateQuestion);
-    } catch (err) {
-        res.status(400).send(err);
+        const updateQuestion = await Question.findById(req.params.id);
+
+        // si aucun id (donc question) n'est trouvé --> erreur 404, sinon question mis à jour
+        if (!updateQuestion) {
+            res.status(404).send({ error: "question non trouvée" });
+        } else {
+            const newQuestion = await Question.findByIdAndUpdate(
+                req.params.id, // id que l'on veut mettre à jour
+                req.body, // le body que l'on veut mettre à jour
+                { new: true } // retourne lea question après sa mise à jour (retourne newQuestion)
+            );
+            res.status(200).send(newQuestion);
+        }
+    } catch(err) {
+        res.status(500).send(err);
     }
 });
 
