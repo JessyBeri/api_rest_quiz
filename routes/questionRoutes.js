@@ -6,7 +6,7 @@ const router = express.Router(); // initialisation du router
 // router.use() --> middleware utilisé pour tous les types de requête http
 // router.get(), .post(), .put(), .delete()
 
-// récupérer toutes les questions
+// récupérer toutes les questions, http://localhost:3000/questions
 router.get("/", (req, res) => {
     try {
         console.log(req.body);
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     }
 });
 
-// récupérer une question
+// récupérer une question, http://localhost:3000/questions/:id
 router.get("/:id", (req, res) => {
     try {
         res.status(200).send({ message: "la question avec id " + req.params.id + " est récupérée" });
@@ -25,19 +25,33 @@ router.get("/:id", (req, res) => {
     }
 });
 
-// poster une question
+// poster une question, http://localhost:3000/questions
 router.post("/", async (req, res) => {
-    const questionAsk = new Question(req.body);
+    // const questionAsk = new Question(req.body);
 
+    // try {
+    //     await questionAsk.save();
+    //     res.status(201).send(questionAsk);
+    // } catch (err) {
+    //     res.status(400).send(err);
+    // }
+
+    //autre méthode
     try {
-        await questionAsk.save();
-        res.status(201).send(questionAsk);
-    } catch (err) {
-        res.status(400).send(err);
+        const { question, multiple_choice } = req.body;
+
+        const questionAsk = await Question.create({
+            question,
+            multiple_choice
+        })
+
+        return res.status(201).send(questionAsk);
+    } catch (error) {
+        return res.status(400).send({"error":error})
     }
 });
 
-// mettre à jour une question
+// mettre à jour une question, http://localhost:3000/questions/:id
 router.put("/:id", (req, res) => {
     try {
         res.status(200).send({ message: "la question avec id " + req.params.id + " est mise à jour" });
@@ -46,7 +60,7 @@ router.put("/:id", (req, res) => {
     }
 });
 
-// supprimer une question
+// supprimer une question, http://localhost:3000/questions/:id
 router.delete("/:id", (req, res) => {
     try {
         res.status(200).send({ message: "la question avec id " + req.params.id + " est supprimée" });
