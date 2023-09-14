@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
-export const categorySchema = new mongoose.Schema({
+const categorySchema = new mongoose.Schema({
     category_name: String,
 });
+
+export const Question = mongoose.model("Categories", categorySchema);
