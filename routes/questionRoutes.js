@@ -1,5 +1,5 @@
 import express from "express";
-import Questions from "../models/questionModel.js";
+import { Question } from "../models/questionModel.js";
 
 const router = express.Router(); // initialisation du router
 
@@ -27,16 +27,13 @@ router.get("/:id", (req, res) => {
 
 // poster une question
 router.post("/", async (req, res) => {
+    const questionAsk = new Question(req.body);
+
     try {
-        const { question, multiple_choice } = req_body;
-        console.log(req.body);
-        const questionAsk = await Questions.save({
-            question,
-            multiple_choice,
-        });
-        res.status(201).json({ questionAsk });
+        await questionAsk.save();
+        res.status(201).send(questionAsk);
     } catch (err) {
-        return res.status(500).json({ error: error });
+        res.status(400).send(err);
     }
 });
 
@@ -57,20 +54,6 @@ router.delete("/:id", (req, res) => {
         res.status(400);
     }
 });
-
-
-
-
-
-// router.post("/", (req, res) => {
-//     try {
-//         const { question, reponses } = req.body;
-//         res.status(201).create(req.body);
-//         console.log(req.body);
-//     } catch (err) {
-//         res.status(400);
-//     }
-// });
 
 export default router;
 
