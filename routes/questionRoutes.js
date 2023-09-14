@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
 
 // poster une question, http://localhost:3000/questions
 router.post("/", async (req, res) => {
-    // Méthode avec save()
+    // ---------- Méthode avec save() ----------
     // const questionAsk = new Question(req.body);
 
     // try {
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
     //     res.status(400).send(err);
     // }
 
-    //Autre méthode avec create()
+    // ---------- Autre méthode avec create() ----------
     try {
         const { question, multiple_choice } = req.body;
 
@@ -62,20 +62,20 @@ router.post("/", async (req, res) => {
 // mettre à jour une question, http://localhost:3000/questions/:id
 router.put("/:id", async (req, res) => {
     try {
-        const updateQuestion = await Question.findById(req.params.id);
+        const questionToUpdate = await Question.findById(req.params.id);
 
         // si aucun id (donc question) n'est trouvé --> erreur 404, sinon question mis à jour
-        if (!updateQuestion) {
-            res.status(404).send({ error: "question non trouvée" });
+        if (!questionToUpdate) {
+            res.status(404).send({ error: "mise à jour impossible, question non trouvée" });
         } else {
-            const newQuestion = await Question.findByIdAndUpdate(
+            const updatedQuestion = await Question.findByIdAndUpdate(
                 req.params.id, // id que l'on veut mettre à jour
                 req.body, // le body que l'on veut mettre à jour
-                { new: true } // retourne lea question après sa mise à jour (retourne newQuestion)
+                { new: true } // retourne la question après sa mise à jour (retourne updatedQuestion)
             );
-            res.status(200).send(newQuestion);
+            res.status(200).send(updatedQuestion);
         }
-    } catch(err) {
+    } catch (err) {
         res.status(500).send(err);
     }
 });
