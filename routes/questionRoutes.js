@@ -66,7 +66,7 @@ router.put("/:id", async (req, res) => {
 
         // si aucun id (donc question) n'est trouvé --> erreur 404, sinon question mis à jour
         if (!questionToUpdate) {
-            res.status(404).send({ error: "mise à jour impossible, question non trouvée" });
+            res.status(404).send({ error: "mise à jour impossible, question introuvable" });
         } else {
             const updatedQuestion = await Question.findByIdAndUpdate(
                 req.params.id, // id que l'on veut mettre à jour
@@ -81,11 +81,19 @@ router.put("/:id", async (req, res) => {
 });
 
 // supprimer une question, http://localhost:3000/questions/:id
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
-        res.status(200).send({ message: "la question avec id " + req.params.id + " est supprimée" });
+        const questionToDelete = await Question.findById(req.params.id);
+
+        // si aucun id (donc question) n'est trouvé --> erreur 404, sinon question supprimée
+        if (!questionToDelete) {
+            res.status(404).send({ error: "suppression impossible, question introuvable" });
+        } else {
+            await Question.deleteOne(); // used to delete the first document that matches the conditions from the collection
+            res.status(200).send(questionToDelete); // renvoie la question supprimée
+        }
     } catch (err) {
-        res.status(400);
+        res.status(500).send(err);
     }
 });
 
