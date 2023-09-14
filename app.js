@@ -19,6 +19,8 @@ const port = process.env.PORT;
 // app.use() --> use() est utilisé dans la gestion des fonctions du middleware
 app.use(express.json()); // Parse les données venant du client vers le serveur au format json
 app.use("/questions/", router); // middleware du routing
+app.use("/categories/", router); // middleware du routing
+
 
 // test affichage
 // app.get() --> get() dit au serveur quoi faire lorsqu'une route lui est donnée
