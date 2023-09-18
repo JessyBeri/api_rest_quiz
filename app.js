@@ -25,7 +25,6 @@ app.use("/categories/", categoryRouter); // middleware du routing
 
 // test affichage
 // app.get() --> get() dit au serveur quoi faire lorsqu'une route lui est donnée
-
 app.get("/", (req, res) => {
     res.send({ test: "test" });
 });

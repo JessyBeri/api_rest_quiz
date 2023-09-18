@@ -15,7 +15,7 @@ export const getOneCategory = async (req, res) => {
     try {
         const oneCategory = await Category.findById(req.params.id);
 
-        // si aucun id (donc question) n'est trouvé --> erreur 404, sinon question récupérée
+        // si aucun id (donc catégorie) n'est trouvé --> erreur 404, sinon catégorie récupérée
         if (!oneCategory) {
             res.status(404).send({ error: "catégorie non trouvée" });
         } else {
@@ -28,17 +28,6 @@ export const getOneCategory = async (req, res) => {
 
 // POST : poster une catégorie, http://localhost:3000/categories
 export const createCategory = async (req, res) => {
-    // ---------- Méthode avec save() ----------
-    // const questionAsk = new Question(req.body);
-
-    // try {
-    //     await questionAsk.save();
-    //     res.status(201).send(questionAsk);
-    // } catch (err) {
-    //     res.status(400).send(err);
-    // }
-
-    // ---------- Autre méthode avec create() ----------
     try {
         const { category_name } = req.body;
 
@@ -83,7 +72,7 @@ export const deleteCategory = async (req, res) => {
             res.status(404).send({ error: "suppression impossible, categorie introuvable" });
         } else {
             await Category.deleteOne(categoryToDelete); // used to delete the first document that matches the conditions from the collection
-            res.status(200).send(categoryToDelete); // renvoie la category supprimée
+            res.status(200).send(categoryToDelete); // renvoie la categorie supprimée
         }
     } catch (err) {
         res.status(500).send(err);
