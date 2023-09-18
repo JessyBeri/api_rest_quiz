@@ -89,7 +89,7 @@ router.delete("/:id", async (req, res) => {
         if (!questionToDelete) {
             res.status(404).send({ error: "suppression impossible, question introuvable" });
         } else {
-            await Question.deleteOne(); // used to delete the first document that matches the conditions from the collection
+            await Question.deleteOne(questionToDelete); // used to delete the first document that matches the conditions from the collection
             res.status(200).send(questionToDelete); // renvoie la question supprimée
         }
     } catch (err) {

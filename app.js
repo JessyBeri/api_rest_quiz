@@ -29,17 +29,6 @@ app.get("/", (req, res) => {
     res.send({ test: "test" });
 });
 
-// app.get("/questions/", (req, res) => {
-//     res.send("envoi post question");
-// });
-
-// app.get("/questions/:id", (req, res) => {
-//     let id = req.params.id;
-//     res.send("question de l'id " + id);
-// });
-
-
-
 // Lancement du serveur express
 app.listen(port, () => {
     console.log(`Serveur actif sur le port ${port} : http://localhost:3000/`);
