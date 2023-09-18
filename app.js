@@ -1,5 +1,6 @@
 import express from 'express';
 import router from "./routes/questionRoutes.js";
+import categoryRouter from "./routes/categoryRoutes.js";
 import dotenv from "dotenv";
 import database from "./config/database.js";
 
@@ -19,7 +20,7 @@ const port = process.env.PORT;
 // app.use() --> use() est utilisé dans la gestion des fonctions du middleware
 app.use(express.json()); // Parse les données venant du client vers le serveur au format json
 app.use("/questions/", router); // middleware du routing
-app.use("/categories/", router); // middleware du routing
+app.use("/categories/", categoryRouter); // middleware du routing
 
 
 // test affichage

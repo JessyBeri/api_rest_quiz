@@ -1,5 +1,5 @@
 import express from "express";
-import { Question } from "../models/questionModel.js";
+// import { Question } from "../models/questionModel.js";
 import {
     getQuestions,
     getOneQuestion,
